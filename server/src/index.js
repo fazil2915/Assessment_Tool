@@ -1,0 +1,44 @@
+import express from "express";
+import dotenv from "dotenv";
+import logger from "./utils/logger.js"
+import morgan from "morgan"
+import connectDb from "./database/connect.js";
+import TeacherRoutes from "./routes/Teacher.js"
+import StudentRoutes from "./routes/Student.js"
+//configuration
+const app=express();
+dotenv.config()
+
+
+//Routes
+const morganFormat = ":method :url :status :response-time ms";
+app.use(
+    morgan(morganFormat, {
+      stream: {
+        write: (message) => {
+          const logObject = {
+            method: message.split(" ")[0],
+            url: message.split(" ")[1],
+            status: message.split(" ")[2],
+            responseTime: message.split(" ")[3],
+          };
+          logger.info(JSON.stringify(logObject));
+        },
+      },
+    })
+  );
+app.use('/api/Teacher',TeacherRoutes)
+app.use('/api/Student',StudentRoutes)
+//server
+const startServer=()=>{
+    try{
+connectDb(process.env.Mongo_url);
+app.listen(process.env.PORT||5000,()=>{
+    console.log(`server running on http://localhost:${process.env.PORT}`);
+})
+}
+catch (error){
+    console.log(err);
+}
+}
+startServer()

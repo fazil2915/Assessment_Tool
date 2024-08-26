@@ -1,0 +1,10 @@
+module.exports={
+ Teacher:require('./models/Teacher.js'),
+ Student:require('./models/Student.js'),
+ Assessment:require('./models/Assessment.js'),
+ Question_bank:require('./models/Question_bank.js'),
+ Question:require('./models/Questions.js'),
+ Submission:require('./models/Submission.js'),
+ Feedback:require('./models/Feedback.js'),
+ Course:require('./models/Course.js')
+}

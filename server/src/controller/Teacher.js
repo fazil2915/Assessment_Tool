@@ -1,0 +1,1 @@
+import Teacher from "../database"
