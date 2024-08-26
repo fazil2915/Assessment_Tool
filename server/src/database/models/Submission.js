@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const Submission=new mongoose.Schema({
+const SubmissionSchema=new mongoose.Schema({
     id:{
         type:String,
         required:true
@@ -16,6 +16,7 @@ const Submission=new mongoose.Schema({
         required:true
     },
 
-})
+},{timestamps:true})
 
-module.exports=mongoose.model('Submission',Submission)
+const Submission=mongoose.model('Submission',SubmissionSchema)
+export default Submission

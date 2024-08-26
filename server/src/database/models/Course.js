@@ -1,10 +1,6 @@
 import mongoose, { Schema } from "mongoose"
 
-const Course=new mongoose.Schema({
-    id:{
-        type:Schema.Types.ObjectId,
-        required:true
-    },
+const CourseSchema=new mongoose.Schema({
     title:{
         type:String,
         required:true,
@@ -17,14 +13,18 @@ const Course=new mongoose.Schema({
         max:100
     },
     resources:{
-        type:String
+        type:String,
+        max:50
     },
     teacher:{
         type:Schema.Types.ObjectId,ref:'Teacher',
         required:true
     },
+    },
+    {
     timestamps:true
 
 })
 
-module.exports=mongoose.model('Course',Course)
+const Course=mongoose.model('Course',CourseSchema)
+export default Course

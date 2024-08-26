@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser"
 import dotenv from "dotenv";
 import logger from "./utils/logger.js"
 import morgan from "morgan"
@@ -27,8 +28,14 @@ app.use(
       },
     })
   );
-app.use('/api/Teacher',TeacherRoutes)
-app.use('/api/Student',StudentRoutes)
+
+app.use(express.json());
+app.use(bodyParser.json({limit:"30mb",extended:true}))
+app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
+
+//api  
+app.use('/api/teacher',TeacherRoutes)
+app.use('/api/student',StudentRoutes)
 //server
 const startServer=()=>{
     try{

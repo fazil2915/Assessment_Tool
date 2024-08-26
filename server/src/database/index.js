@@ -1,10 +1,19 @@
-module.exports={
- Teacher:require('./models/Teacher.js'),
- Student:require('./models/Student.js'),
- Assessment:require('./models/Assessment.js'),
- Question_bank:require('./models/Question_bank.js'),
- Question:require('./models/Questions.js'),
- Submission:require('./models/Submission.js'),
- Feedback:require('./models/Feedback.js'),
- Course:require('./models/Course.js')
-}
+import Teacher from './models/Teacher.js';
+import Student from './models/Student.js';
+import Assessment from './models/Assessment.js';
+import QuestionBank from './models/Question_bank.js';
+import Question from './models/Questions.js';
+import Submission from './models/Submission.js';
+import Feedback from './models/Feedback.js';
+import Course from './models/Course.js';
+
+export {
+  Teacher,
+  Student,
+  Assessment,
+  QuestionBank,
+  Question,
+  Submission,
+  Feedback,
+  Course
+};

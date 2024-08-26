@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const Question_bank=new mongoose.Schema({
+const Question_bankSchema=new mongoose.Schema({
     id:{
         type:String,
         required:true
@@ -12,10 +12,12 @@ const Question_bank=new mongoose.Schema({
         type:Schema.Types.ObjectId, ref:'Question',
         required:true
     }],
-    
-    timestamps:true
 
+
+},{
+    timestamps:true
 })
 
 
-module.exports=mongoose.model('Question_bank',Question_bank);
+const Question_bank=mongoose.model('Question_bank',Question_bankSchema);
+export default Question_bank

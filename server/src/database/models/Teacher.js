@@ -1,16 +1,13 @@
 import mongoose from "mongoose"
 
 const TeacherSchema= new mongoose.Schema({
-id:{
-    type:String,
-    required:true
-},
+
 name:{
     type:String,
     required:true,
     max:50
 },
-Role:{
+role:{
     required:true,
     type:String,
 },
@@ -25,4 +22,5 @@ min:5
 }
 
 })
-module.exports=mongoose.model('Teacher',TeacherSchema);
+const Teacher=mongoose.model('Teacher',TeacherSchema);
+export default Teacher;

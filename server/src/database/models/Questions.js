@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose"
 
-const Question =new mongoose.Schema({
+const QuestionSchema =new mongoose.Schema({
 
     Quest_id:{
         type:String,
@@ -29,7 +29,7 @@ const Question =new mongoose.Schema({
     type:Number
     },
     Options:[{
-        option:{type:string},
+        option:{type:String},
         Is_Correct:{type:Boolean,default:false}
     }],
     Answer: { 
@@ -45,4 +45,5 @@ const Question =new mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model('Question',Question)
+const Question=mongoose.model('Question',QuestionSchema)
+export default Question

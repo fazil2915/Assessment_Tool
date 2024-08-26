@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const Feedback=new mongoose.Schema({
+const FeedbackSchema=new mongoose.Schema({
     id:{
         type:String,
         required:true
@@ -19,7 +19,9 @@ const Feedback=new mongoose.Schema({
             required:true
         }
     ]
+},{
+    timestamps:true
 })
 
-
-module.exports=mongoose.model('Feedback',Feedback)
+const Feedback=mongoose.model('Feedback',FeedbackSchema)
+export default Feedback

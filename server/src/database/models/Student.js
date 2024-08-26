@@ -1,16 +1,12 @@
 import mongoose from "mongoose"
 
 const StudentSchema= new mongoose.Schema({
-id:{
-    type:String,
-    required:true
-},
 name:{
     type:String,
     required:true,
     max:50
 },
-Role:{
+role:{
     required:true,
     type:String,
 },
@@ -25,4 +21,5 @@ min:5
 }
 
 })
-module.exports=mongoose.model('Student',StudentSchema);
+const Student=mongoose.model('Student',StudentSchema);
+export default Student
