@@ -9,7 +9,7 @@ export const createCourse=async (req,res)=>{
         resources,
         teacher
       } =req.body 
-      const newCourse=await new Course({
+      const newCourse= await new Course({
         title,
         description,
         resources,
@@ -111,7 +111,8 @@ export const updateAssessment= async (req,res)=>{
       status,
       due,
       time_limit,
-      attempt
+      attempt,
+      visibility
     }=req.body
 
     //find assessment id and update
@@ -122,7 +123,8 @@ export const updateAssessment= async (req,res)=>{
         status,
         due,
         time_limit,
-        attempt
+        attempt,
+        visibility
       },{new:true,runValidators:true}
     );
     if(!updateAssessment){
