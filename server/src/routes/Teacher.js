@@ -3,7 +3,8 @@ import {verifyToken} from "../middleware/auth.js"
 import {register,login} from "../controller/auth.js"
 import { createCourse,
          createAsessment,
-         upddateAssessment,
+         updateAssessment,
+         deleteAssessment,
          addResource,
          getAssessment,
          createQuestion,
@@ -16,7 +17,8 @@ router.post('/login',login)
 router.post('/course',verifyToken,createCourse)
 router.post("/assessment/:id",verifyToken,createAsessment)
 router.put('/assessment/:id/addresource',verifyToken,addResource)
-router.put('/assessment/:id/update',verifyToken,upddateAssessment)
+router.put('/assessment/:id/update',verifyToken,updateAssessment)
+router.delete("/assessment/:id/delete",verifyToken,deleteAssessment)
 router.get('/assessment/:id/getassessment',verifyToken,getAssessment)
 router.post('/assessment/createQuestion',verifyToken,createQuestion)
 export default router;

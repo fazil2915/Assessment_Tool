@@ -102,7 +102,7 @@ export const addResource=async (req,res)=>{
 }
 
 //update Assessment
-export const upddateAssessment= async (req,res)=>{
+export const updateAssessment= async (req,res)=>{
   try {
     const {id}=req.params
     const{
@@ -160,6 +160,23 @@ export const getAssessment=async (req,res)=>{
   } catch (error) {
     res.status(500).json({err:error.message})
   }
+}
+
+export const deleteAssessment=async (req,res)=>{
+  try {
+    const {id}=req.params
+
+    //find bt id and delete
+    const deleteAsess=await Assessment.findByIdAndDelete(id);
+    if(!deleteAsess){
+      res.status(404).json({message:"Assessment not found!!"})
+    }
+  
+    res.status(200).json(deleteAsess)
+  } catch (error) {
+    res.status(500).json({err:error.message})
+  }
+ 
 }
 
 //questions

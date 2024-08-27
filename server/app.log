@@ -70,3 +70,7 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/teacher/assessment/createQuestion\",\"status\":\"500\",\"responseTime\":\"11.231\"}","timestamp":"2024-08-27T15:22:52.895Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/teacher/assessment/66cdac591b6721cf59dc5098/update\",\"status\":\"200\",\"responseTime\":\"339.256\"}","timestamp":"2024-08-27T18:02:53.003Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/teacher/assessment/66cc9db2aba73b79043c5628\",\"status\":\"201\",\"responseTime\":\"652.373\"}","timestamp":"2024-08-27T18:03:57.971Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/teacher/assessment/66ce150d99058e4b40267485/delete\",\"status\":\"200\",\"responseTime\":\"290.178\"}","timestamp":"2024-08-27T18:44:56.866Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/assessment/66cc9db2aba73b79043c5628/getassessment\",\"status\":\"200\",\"responseTime\":\"815.240\"}","timestamp":"2024-08-27T18:45:29.061Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/teacher/assessment/66cc9db2aba73b79043c5628\",\"status\":\"201\",\"responseTime\":\"1218.881\"}","timestamp":"2024-08-27T18:45:56.896Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/assessment/66cc9db2aba73b79043c5628/getassessment\",\"status\":\"200\",\"responseTime\":\"957.904\"}","timestamp":"2024-08-27T18:46:14.101Z"}
