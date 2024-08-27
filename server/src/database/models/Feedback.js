@@ -13,9 +13,9 @@ const FeedbackSchema=new mongoose.Schema({
         type:Schema.Types.ObjectId,ref:"Submission",
         required:true
     },
-    Student:[
+    assessment:[
         {
-            type:Schema.Types.ObjectId,ref:"Student",
+            type:Schema.Types.ObjectId,ref:"Assessment",
             required:true
         }
     ]

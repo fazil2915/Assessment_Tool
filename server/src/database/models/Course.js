@@ -16,6 +16,9 @@ const CourseSchema=new mongoose.Schema({
         type:String,
         max:50
     },
+    assessment:{
+     type:Schema.Types.ObjectId,ref:"Assessment"
+    },
     teacher:{
         type:Schema.Types.ObjectId,ref:'Teacher',
         required:true

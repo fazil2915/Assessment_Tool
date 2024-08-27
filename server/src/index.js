@@ -46,6 +46,7 @@ app.listen(process.env.PORT||5000,()=>{
 }
 catch (error){
     console.log(err);
+    process.exit(1);
 }
 }
 startServer()

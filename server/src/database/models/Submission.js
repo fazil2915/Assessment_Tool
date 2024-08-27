@@ -10,11 +10,8 @@ const SubmissionSchema=new mongoose.Schema({
     },
     assessment:{
         type:Schema.Types.ObjectId,ref:"Assessment",required:true
-    },
-    student_id:{
-        type:Schema.Types.ObjectId,ref:"Student",
-        required:true
-    },
+    }
+    
 
 },{timestamps:true})
 

@@ -2,45 +2,40 @@ import mongoose, { Schema } from "mongoose"
 
 const QuestionSchema =new mongoose.Schema({
 
-    Quest_id:{
-        type:String,
-        required:true
-    },
-    Text:{
+    
+    text:{
       type:String,
       required:true
     },
-    Type:{
+    type:{
      type:String,
      enum:['Multiple','True/False','short Answer','Essay'],required:true
     },
-    Difficulty:{
+    difficulty:{
         type:String,
         enum:['Easy','Medium','Hard'],required:true
     },
-    Subject:{
+    subject:{
         type:String,
         required:true
     },
-    Category:{
+    category:{
         type:String,
     },
-    Score:{
+    score:{
     type:Number
     },
-    Options:[{
+    options:[{
         option:{type:String},
-        Is_Correct:{type:Boolean,default:false}
+        is_Correct:{type:Boolean,default:false}
     }],
-    Answer: { 
-        type: Schema.Types.Mixed, 
-        required: function() { return this.Type !== 'Essay'; } 
-        // Mixed type to handle different types of answers (string for short answer, boolean for true/false, etc.)
+    answer: { 
+        type:String
     },
-    teacher:{
+    teacher_id:{
         type:Schema.Types.ObjectId,ref:"Teacher",required:true
     },
-    IsReusable:{
+    isReusable:{
         type:Boolean,default:true
     }
 })

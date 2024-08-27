@@ -1,9 +1,9 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, trusted } from "mongoose";
 
 const AssessmentSchema = new mongoose.Schema({
-    ass_id: {
-        type: String,
-        required: true
+    teacher_id:{
+    type:Schema.Types.ObjectId,
+    required:true
     },
     title: {
         type: String,
@@ -13,7 +13,7 @@ const AssessmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tags: {
+    type: {
         type: String,
         enum: ['quiz', 'Assignment', 'Exercise'], // Fixed typo from 'Excersise' to 'Exercise'
         required: true
@@ -22,12 +22,12 @@ const AssessmentSchema = new mongoose.Schema({
         type: { type: String, enum: ['Automated', 'Manual'], required: true },
         Criteria: { type: String } // Specific criteria for grading
     },
-    question_bank: {
+    question_bank: [{
         type: Schema.Types.ObjectId,
-        ref: 'Question_bank',
+        ref: 'Question',
         required: true
-    },
-    course: {
+    }],
+    attachment: {
         type: Schema.Types.ObjectId,
         ref: 'Course',
         required: true
@@ -60,8 +60,8 @@ const AssessmentSchema = new mongoose.Schema({
         performed_by: { type: Schema.Types.ObjectId, ref: "User" }
     },
     scheduled_at: Date, // Fixed typo from 'sheduled_at' to 'scheduled_at'
-    Due: Date,
-    Time_limit: Number
+    due: Date,
+    time_limit: Number
 }, {
     timestamps: true // Added this outside the schema definition to automatically handle createdAt and updatedAt
 });
