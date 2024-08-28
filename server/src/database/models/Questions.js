@@ -32,9 +32,6 @@ const QuestionSchema =new mongoose.Schema({
     answer: { 
         type:String
     },
-    teacher_id:{
-        type:Schema.Types.ObjectId,ref:"Teacher",required:true
-    },
     isReusable:{
         type:Boolean,default:true
     }

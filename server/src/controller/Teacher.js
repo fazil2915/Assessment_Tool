@@ -1,4 +1,4 @@
-import {Course, Teacher,Assessment, Question} from "../database/index.js"
+import {Course, Teacher,Assessment, Question,Submission} from "../database/index.js"
 
 //course
 export const createCourse=async (req,res)=>{
@@ -92,7 +92,7 @@ export const addResource=async (req,res)=>{
     ).populate('attachment') //populate attachment as course
 
     if(!assessment){
-      return res.status(404).json({message:"Assessment not found"})
+      return res.status(404).json({message:"Assessment not found!"})
     }
 
     res.status(200).json(assessment)
@@ -149,7 +149,7 @@ export const getAssessment=async (req,res)=>{
     }
 
     const assessments=await Assessment.find({teacher_id})
-    
+    .populate('question_bank')
     .populate('attachment')
     .populate('visibility')
     .exec()
@@ -184,7 +184,7 @@ export const deleteAssessment=async (req,res)=>{
 //questions
 export const createQuestion=async (req,res)=>{
   try {
-    
+    const{teacher_id}=req.params
     const {
       text,
       type,
@@ -194,10 +194,9 @@ export const createQuestion=async (req,res)=>{
       score,
       options,
       answer,
-      teacher_id,
       isReusable
     } = req.body;
-    const teacherExists = await Teacher.findById(teacher_id);
+    const teacherExists = await Teacher.find(teacher_id)
     if (!teacherExists) {
       return res.status(404).json({ error: 'Teacher not found' });
     }
@@ -211,11 +210,10 @@ export const createQuestion=async (req,res)=>{
     score,
     options,
     answer,
-    teacher_id,
     isReusable
   });
    
-     await newQuestion.save();
+     await newQuestion.save()
 
     
     res.status(201).json(newQuestion);
@@ -223,4 +221,31 @@ export const createQuestion=async (req,res)=>{
     res.status(500).json({err:error.message})
   }
 }
+
+export const getQuestions=async (req,res)=>{
+  try {
+    const getQuestion=await Question.find({})
+    if(!getQuestion){
+      return res.status(404).json({message:"Question not found"})
+    }
+
+    res.status(200).json(getQuestion)
+  } catch (error) {
+    res.status(500).json({err:error.message})
+  }
+}
+
+//submission
+//get submission done by the student
+
+
+//give feedback
+
+
+
+//recent Activities
+
+//search filter
+
+
 
