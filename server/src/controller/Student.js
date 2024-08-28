@@ -18,20 +18,23 @@ export const getAssessment=async(req,res)=>{
     }
 }
 
-// export const getOverdueAssessments = async (req, res) => {
-//     try {
-//       // Get the current date and time
-//       const currentDate = new Date();
+export const getOverdueAssessments = async (req, res) => {
+    try {
+      // Get the current date and time
+      const currentDate = new Date()
   
-//       // Find assessments where the due date is less than the current date
-//       const overdueAssessments = await Assessment.find({ due: { $lt: currentDate } });
+      // Find assessments where the due date is less than the current date
+      const overdueAssessments = await Assessment.find({ due: { $lt: currentDate } });
   
-//       if (!overdueAssessments || overdueAssessments.length === 0) {
-//         return res.status(404).json({ message: 'No overdue assessments found' });
-//       }
+      if (!overdueAssessments || overdueAssessments.length === 0) {
+        return res.status(404).json({ message: 'No overdue assessments found' });
+      }
   
-//       res.status(200).json(overdueAssessments);
-//     } catch (error) {
-//       res.status(500).json({ err: error.message });
-//     }
-//   };
+      res.status(200).json(overdueAssessments);
+    } catch (error) {
+      res.status(500).json({ err: error.message });
+    }
+  };
+
+  
+  

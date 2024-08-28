@@ -90,3 +90,9 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/visibility/66ccb64cf437e059b79bb572\",\"status\":\"500\",\"responseTime\":\"8.211\"}","timestamp":"2024-08-27T19:43:03.182Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/visibility/66ccb64cf437e059b79bb572\",\"status\":\"404\",\"responseTime\":\"341.109\"}","timestamp":"2024-08-27T19:43:36.539Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/visibility/66ccb64cf437e059b79bb572\",\"status\":\"200\",\"responseTime\":\"293.700\"}","timestamp":"2024-08-27T19:44:21.755Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/visibility/66ccb64cf437e059b79bb572\",\"status\":\"200\",\"responseTime\":\"301.675\"}","timestamp":"2024-08-28T06:25:36.778Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/student/login\",\"status\":\"200\",\"responseTime\":\"431.927\"}","timestamp":"2024-08-28T06:27:18.634Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/overdue\",\"status\":\"404\",\"responseTime\":\"379.608\"}","timestamp":"2024-08-28T06:30:34.898Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/overdue\",\"status\":\"404\",\"responseTime\":\"277.745\"}","timestamp":"2024-08-28T06:30:53.189Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/teacher/assessment/66cdac591b6721cf59dc5098/update\",\"status\":\"200\",\"responseTime\":\"311.438\"}","timestamp":"2024-08-28T06:33:27.307Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/student/assessment/overdue\",\"status\":\"200\",\"responseTime\":\"271.538\"}","timestamp":"2024-08-28T06:33:43.383Z"}
