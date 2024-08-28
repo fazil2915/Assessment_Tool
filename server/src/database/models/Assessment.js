@@ -25,7 +25,7 @@ const AssessmentSchema = new mongoose.Schema({
     question_bank: [{
         type: Schema.Types.ObjectId,
         ref: 'Question',
-        required: true
+        
     }],
     attachment: {
         type: Schema.Types.ObjectId,

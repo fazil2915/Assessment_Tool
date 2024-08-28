@@ -1,5 +1,5 @@
 import {Course, Teacher,Assessment, Question,Submission} from "../database/index.js"
-
+import mongoose from "mongoose"
 //course
 export const createCourse=async (req,res)=>{
     try {
@@ -196,7 +196,7 @@ export const createQuestion=async (req,res)=>{
       answer,
       isReusable
     } = req.body;
-    const teacherExists = await Teacher.find(teacher_id)
+    const teacherExists = await Teacher.findById(teacher_id)
     if (!teacherExists) {
       return res.status(404).json({ error: 'Teacher not found' });
     }
@@ -234,6 +234,39 @@ export const getQuestions=async (req,res)=>{
     res.status(500).json({err:error.message})
   }
 }
+
+
+export const addQuestionToAsses = async (req, res) => {
+  try {
+    const {id,assess_Id } = req.params
+
+    const question = await Question.findById(id);
+
+    if (!question) {
+          return res.status(404).json({ message: "Question not found" });
+    }
+
+    const toAssessment = await Assessment.findByIdAndUpdate(
+      assess_Id,
+      { $push: { question_bank: question._id } }, 
+      { new: true }
+    );
+
+
+    if (!toAssessment) {
+      console.log("Assessment not found");
+      return res.status(404).json({ message: "Assessment not found" });
+    }
+
+    res.status(200).json(toAssessment);
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ err: error.message });
+  }
+};
+
+
+
 
 //submission
 //get submission done by the student
