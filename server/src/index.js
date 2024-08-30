@@ -2,6 +2,8 @@ import express from "express";
 import bodyParser from "body-parser"
 import dotenv from "dotenv";
 import logger from "./utils/logger.js"
+import cors from "cors"
+import helmet from "helmet"
 import morgan from "morgan"
 import connectDb from "./database/connect.js";
 import TeacherRoutes from "./routes/Teacher.js"
@@ -32,7 +34,9 @@ app.use(
 app.use(express.json());
 app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
-
+app.use(cors())
+app.use(helmet())
+app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 //api  
 app.use('/api/teacher',TeacherRoutes)
 app.use('/api/student',StudentRoutes)
