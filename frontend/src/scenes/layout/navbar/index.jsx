@@ -6,7 +6,8 @@ import {
   useTheme,
   Menu,
   MenuItem,
-  Typography
+  Typography,
+  Avatar,
 } from "@mui/material";
 import {
   DarkModeOutlined,
@@ -15,18 +16,19 @@ import {
   PersonOutlined,
   SearchOutlined,
 } from "@mui/icons-material";
+import {tokens} from "@/theme"
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setMode,setLogout } from "@/state";
 const Navbar = ({ onMenuToggle }) => {
   const theme = useTheme();
+  const colors=tokens(theme.palette.mode);
+  const user=useSelector((state)=>state.user)
   const dispatch = useDispatch();
   const isMdDevices = useMediaQuery("(max-width:768px)");
   const isXsDevices = useMediaQuery("(max-width:466px)");
-
   const [anchorEl, setAnchorEl] = useState(null);
   
-
   // Toggle menu open/close
   const handleMenuToggle = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -49,18 +51,19 @@ const Navbar = ({ onMenuToggle }) => {
         )}
       </Box>
       <Box display="flex" alignItems="center">
-        <IconButton onClick={()=> dispatch(setMode())}>
-          {theme.palette.mode === "dark" ?  <DarkModeOutlined />: <LightModeOutlined />}
+        <Avatar sx={{bgcolor:colors.blueAccent[600]}}>{`${user.name[0]}`}</Avatar>
+        <IconButton onClick={()=> dispatch(setMode())} >
+          {theme.palette.mode === "dark" ?  <DarkModeOutlined sx={{width:"1.5rem",height:"1.5rem"}}/>: <LightModeOutlined sx={{width:"1.5rem",height:"1.5rem"}}/>}
         </IconButton>
         <IconButton onClick={handleMenuToggle}>
-        <PersonOutlined/>
+        <PersonOutlined sx={{width:"1.8rem",height:"1.8rem"}}/>
       </IconButton>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuToggle}
       >
-        <MenuItem onClick={handleMenuToggle}>Text</MenuItem>
+        <MenuItem onClick={handleMenuToggle}>{`${user.name}`}</MenuItem>
         <MenuItem
           onClick={() => {
             dispatch(setLogout());

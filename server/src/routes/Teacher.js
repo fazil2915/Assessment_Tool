@@ -16,7 +16,7 @@ const router=express.Router()
 
 router.post('/register',register);
 router.post('/login',login)
-router.post('/course',verifyToken,createCourse)
+router.post('/course/:teach_id',verifyToken,createCourse)
 router.post("/assessment/:id",verifyToken,createAsessment)
 router.put('/assessment/:id/addresource',verifyToken,addResource)
 router.put('/assessment/:id/update',verifyToken,updateAssessment)

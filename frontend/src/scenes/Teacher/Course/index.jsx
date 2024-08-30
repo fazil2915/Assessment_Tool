@@ -1,34 +1,91 @@
-import { Box, Button, TextField, useMediaQuery } from "@mui/material";
+import { Box, Button, useTheme, TextField, 
+  useMediaQuery,
+  Card, 
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActionArea, } from "@mui/material";
 import { Header } from "@/components";
 import { Formik } from "formik";
 import * as yup from "yup";
-
+import { tokens } from "@/theme";
+import { useDispatch, useSelector } from "react-redux";
+import {setCourse} from "@/state"
+import { useNavigate } from "react-router-dom";
 const initialValues = {
   
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
+title:"",
+description:"",
+resources:"",
 };
 
 
 
 const checkoutSchema = yup.object().shape({
-
+  title: yup.string().required("required"),
+  description: yup.string().required("required"),
+  resources: yup.string().required("required"),
 });
 
+
 const CourseForm = () => {
+  const theme = useTheme();
+  const dispatch=useDispatch()
+  const navigate = useNavigate();
+  const colors = tokens(theme.palette.mode);
+  const token = useSelector((state) => state.token);
+  console.log(token);
+  
+  const user=useSelector((state)=>state.user)
+  
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const handleFormSubmit = (values, actions) => {
+
+  const getCourse=async (values)=>{
+    
+  }
+ 
+  const createCourse = async (values, onSubmitProps) => {
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    try {
+      const body=JSON.stringify(values)
+      const response = await fetch(`http://localhost:8000/api/teacher/course/${user._id}`, {
+        method: "POST",
+        body,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        
+      });
+      const loggedIn = await response.json();
+     
+      if (loggedIn) {
+        onSubmitProps.resetForm();
+        dispatch(
+          setCourse({
+            course: loggedIn
+          })
+        );
+        navigate("/dash");
+      } else {
+        console.error("Error creating course:", loggedIn.message || loggedIn.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    
+  };
+
+  const handleFormSubmit = async  (values, onSubmitProps) => {
+    await createCourse(values, onSubmitProps);
     console.log(values);
-    actions.resetForm({
-      values: initialValues,
-    });
   };
   return (
     <Box m="20px">
-      <Header title="CREATE Course" subtitle="Create a Course to Add Assessment" />
+      <Header title="Create Course" subtitle="Create a Course to Add Assessment" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -47,33 +104,19 @@ const CourseForm = () => {
             <Box
               display="grid"
               gap="30px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+              gridTemplateColumns="repeat(1, 1fr)"
               sx={{
                 "& > div": {
                   gridColumn: isNonMobile ? undefined : "span 4",
                 },
               }}
             >
-              <TextField
+             
+              {/* <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={touched.firstName && errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{
-                  gridColumn: "span 2",
-                }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
+                label=""
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.lastName}
@@ -81,47 +124,49 @@ const CourseForm = () => {
                 error={touched.lastName && errors.lastName}
                 helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: "span 2" }}
-              />
+              /> */}
+              
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Email"
+                label="Title"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={touched.email && errors.email}
-                helperText={touched.email && errors.email}
+                value={values.title}
+                name="title"
+                title="title"
+                error={touched.title && errors.title}
+                helperText={touched.title && errors.title}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Contact Number"
+                label="Description"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name="contact"
-                error={touched.contact && errors.contact}
-                helperText={touched.contact && errors.contact}
+                value={values.description}
+                name="description"
+                error={touched.description && errors.description}
+                helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address 1"
+                label="Resource link"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address1}
-                name="address1"
-                error={touched.address1 && errors.address1}
-                helperText={touched.address1 && errors.address1}
+                value={values.resources}
+                name="resources"
+                error={touched.resources && errors.resources}
+                helperText={touched.resources && errors.resources}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
+              {/* <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -133,7 +178,7 @@ const CourseForm = () => {
                 error={touched.address2 && errors.address2}
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 4" }}
-              />
+              /> */}
             </Box>
             <Box
               display="flex"
@@ -141,13 +186,65 @@ const CourseForm = () => {
               justifyContent="end"
               mt="20px"
             >
-              <Button type="submit" color="secondary" variant="contained">
-                Create New User
+              <Button type="submit" sx={{ backgroundColor: colors.blueAccent[600]}} variant="contained">
+                Create New Course
               </Button>
             </Box>
           </form>
         )}
       </Formik>
+      <Box>
+  <Header title="Courses" subtitle="Your available courses" />
+  <Box 
+    sx={{ 
+      display: 'grid', 
+      gap: 2, // Adjust gap for spacing between cards
+      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' // Responsive grid layout
+    }}
+  >
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Course 1
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Course 1 description goes here. Provide some meaningful content.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Course 2
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Course 2 description goes here. Provide some meaningful content.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Course 3
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Course 3 description goes here. Provide some meaningful content.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+
+    {/* Add more cards as needed */}
+  </Box>
+</Box>
+
     </Box>
   );
 };

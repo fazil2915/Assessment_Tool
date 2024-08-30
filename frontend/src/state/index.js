@@ -4,6 +4,7 @@ const initialState={
     user:null,
     token:null,
     role:null,
+    course:[],
     assessment:[]
 }
 
@@ -14,7 +15,7 @@ const authSlice= createSlice({
         setLogin:(state,action)=>{
             state.user=action.payload.user,
             state.token=action.payload.token
-            state.assessment=action.payload.token
+            state.assessment=action.payload.assessment
         },
         setLogout:(state)=>{
             state.user=null,
@@ -24,8 +25,11 @@ const authSlice= createSlice({
         setMode: (state) => {
             state.mode = state.mode === "light" ? "dark" : "light";
           },
+          setCourse:(state,action)=>{
+            state.course=action.payload.course
+          }
     }
 });
 
-export const {setLogin,setLogout,setMode}=authSlice.actions;
+export const {setLogin,setLogout,setMode,setCourse}=authSlice.actions;
 export default authSlice.reducer;

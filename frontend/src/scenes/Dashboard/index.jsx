@@ -3,6 +3,7 @@ import {
   Button,
   IconButton,
   Typography,
+
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -21,12 +22,14 @@ import {
   LibraryBooksRounded,
   FeedbackRounded
 } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import { tokens } from "@/theme";
-import Contacts from "../Teacher/Assessment";
 import SideBar from "../layout/sidebar";
+import { PieChart } from "@/components";
 
 function Dashboard() {
   const theme = useTheme();
+  const user=useSelector((state)=>state.user)
   const colors = tokens(theme.palette.mode);
   const isXlDevices = useMediaQuery("(min-width: 1260px)");
   const isMdDevices = useMediaQuery("(min-width: 724px)");
@@ -34,7 +37,8 @@ function Dashboard() {
   return (
     <Box ml="2rem">
       <Box display="flex" justifyContent="space-between">
-        <Header title="TEACHERS DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Header title={`${user.role ? user.role.toUpperCase() : "USER"} DASHBOARD`} subtitle="Welcome to your dashboard" />
+
         {!isXsDevices && (
           <Box>
             <Button
@@ -151,7 +155,7 @@ function Dashboard() {
         </Box>
       </Box>
       <SideBar />
-
+     <PieChart/>
     </Box>
   );
 }

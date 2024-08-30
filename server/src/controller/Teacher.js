@@ -3,17 +3,18 @@ import mongoose from "mongoose"
 //course
 export const createCourse=async (req,res)=>{
     try {
+      const {teach_id}=req.params
       const{
         title,
         description,
         resources,
-        teacher
+        teacher,
       } =req.body 
       const newCourse= await new Course({
         title,
         description,
         resources,
-        teacher
+        teacher:teach_id,
       });
       const savedCourse= await newCourse.save()
 

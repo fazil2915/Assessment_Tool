@@ -4,57 +4,57 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { mockDataContacts } from "@/data/mockData";
 import {tokens} from "@/theme"
 
-const Contacts = () => {
+const Question_Bank = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "Title", headerName: "Title" },
+    { field: "registrarId", headerName: "Registrar ID" },
     {
-      field: "type",
-      headerName: "Type",
+      field: "name",
+      headerName: "Name",
       flex: 1,
-      cellClassName: "type-column--cell",
+      cellClassName: "name-column--cell",
     },
     {
-      field: "attempt",
-      headerName: "Attempts",
+      field: "age",
+      headerName: "Age",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "feedback",
-      headerName: "Feedback",
+      field: "phone",
+      headerName: "Phone Number",
       flex: 1,
     },
     {
-      field: "sheduled_at",
-      headerName: "Sheduled At",
+      field: "email",
+      headerName: "Email",
       flex: 1,
     },
     {
-      field: "due",
-      headerName: "Due",
+      field: "address",
+      headerName: "Address",
       flex: 1,
     },
     {
-      field: "time limit",
-      headerName: "time_limit",
+      field: "city",
+      headerName: "City",
       flex: 1,
     },
     {
-      field: "created_at",
-      headerName: "Created At",
+      field: "zipCode",
+      headerName: "Zip Code",
       flex: 1,
     },
   ];
   return (
     <Box m="20px">
       <Header
-        title="ASSESSMENTS"
-        subtitle="List of Assessments have done"
+        title="QUESTION BANK"
+        subtitle="List of Questions for Assessments"
       />
       <Box
         mt="40px"
@@ -110,4 +110,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Question_Bank;

@@ -154,19 +154,19 @@ const SideBar = () => {
           }}
         >
           <Item
-            title="Manage Team"
-            path="/team"
+            title="Assessments"
+            path="/assessment"
             colors={colors}
             icon={<PeopleAltOutlined />}
           />
           <Item
-            title="Contacts Information"
-            path="/contacts"
+            title="Question Bank"
+            path="/question_bank"
             colors={colors}
             icon={<ContactsOutlined />}
           />
           <Item
-            title="Invoices Balances"
+            title="Submission"
             path="/invoices"
             colors={colors}
             icon={<ReceiptOutlined />}
@@ -191,7 +191,7 @@ const SideBar = () => {
           }}
         >
           <Item
-            title="Profile Form"
+            title="Setings"
             path="/form"
             colors={colors}
             icon={<PersonOutlined />}
@@ -203,7 +203,7 @@ const SideBar = () => {
             icon={<CalendarTodayOutlined />}
           />
           <Item
-            title="FAQ Page"
+            title="Grade"
             path="/faq"
             colors={colors}
             icon={<HelpOutlineOutlined />}
@@ -211,7 +211,7 @@ const SideBar = () => {
         </Menu>
 
 
-        <Typography
+        {/* <Typography
           variant="h6"
           color={colors.gray[300]}
           sx={{ m: "15px 0 5px 20px" }}
@@ -259,8 +259,9 @@ const SideBar = () => {
             colors={colors}
             icon={<WavesOutlined />}
           />
-        </Menu>
+        </Menu> */}
       </Box>
+     
     </Sidebar>
   );
 };
