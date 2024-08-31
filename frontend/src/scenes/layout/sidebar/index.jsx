@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
+
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useContext, useState } from "react";
 import { tokens } from "../../../theme";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
-
 import {
   BarChartOutlined,
   CalendarTodayOutlined,
@@ -23,9 +22,8 @@ import {
 import Item from "./Item";
 
 
-const SideBar = () => {
+const SideBar = ({role}) => {
   const [collapsed, setCollapsed] = useState(false);
-
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -58,63 +56,12 @@ const SideBar = () => {
               justifyContent: "space-between",
             }}
           >
-            {/* {!collapsed && (
-              <Box
-                display="flex"
-                alignItems="center"
-                gap="12px"
-                sx={{ transition: ".3s ease" }}
-              >
-                <img
-                  style={{ width: "30px", height: "30px", borderRadius: "8px" }}
-                  
-                  alt="Argon"
-                />
-                <Typography
-                  variant="h4"
-                  fontWeight="bold"
-                  textTransform="capitalize"
-                  color={colors.greenAccent[500]}
-                >
-                  Argon
-                </Typography>
-              </Box>
-            )} */}
             <IconButton onClick={() => setCollapsed(!collapsed)}>
               <MenuOutlined />
             </IconButton>
           </Box>
         </MenuItem>
       </Menu>
-      {/* {!collapsed && (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "10px",
-            mb: "25px",
-          }}
-        >
-          <Avatar
-            alt="avatar"
-           
-            sx={{ width: "100px", height: "100px" }}
-          />
-          <Box sx={{ textAlign: "center" }}>
-            <Typography variant="h3" fontWeight="bold" color={colors.gray[100]}>
-              Tony Stark
-            </Typography>
-            <Typography
-              variant="h6"
-              fontWeight="500"
-              color={colors.greenAccent[500]}
-            >
-              VP Fancy Admin
-            </Typography>
-          </Box>
-        </Box>
-      )} */}
 
       <Box mb={5} pl={collapsed ? undefined : "5%"}>
         <Menu
@@ -128,12 +75,20 @@ const SideBar = () => {
             },
           }}
         >
+          {!role&&(
           <Item
             title="Courses"
             path="/course"
             colors={colors}
             icon={<DashboardOutlined />}
-          />
+          />)}
+          {role&&(
+          <Item
+            title="Courses"
+            path="/studentcourse"
+            colors={colors}
+            icon={<DashboardOutlined />}
+          />)}
         </Menu>
         {/* <Typography
           variant="h6"
@@ -153,24 +108,43 @@ const SideBar = () => {
             },
           }}
         >
+          {!role&&(
           <Item
             title="Assessments"
             path="/assessment"
             colors={colors}
             icon={<PeopleAltOutlined />}
-          />
+          />)}
+
+          {role&&(
+          <Item
+            title="Assessments"
+            path="/studentAssessment"
+            colors={colors}
+            icon={<PeopleAltOutlined />}
+          />)}
+          {!role &&(
           <Item
             title="Question Bank"
             path="/question_bank"
             colors={colors}
             icon={<ContactsOutlined />}
-          />
+          />)}
+          {!role&&(
           <Item
             title="Submission"
-            path="/invoices"
+            path="/submission"
             colors={colors}
             icon={<ReceiptOutlined />}
-          />
+          />)}
+
+          {role&&(
+          <Item
+            title="Submission"
+            path="/studentSubmission"
+            colors={colors}
+            icon={<ReceiptOutlined />}
+          />)}
         </Menu>
         {/* <Typography
           variant="h6"
@@ -190,24 +164,33 @@ const SideBar = () => {
             },
           }}
         >
+          {!role&& (
           <Item
             title="Setings"
             path="/form"
             colors={colors}
             icon={<PersonOutlined />}
-          />
+          />)}
           <Item
             title="Calendar"
             path="/calendar"
             colors={colors}
             icon={<CalendarTodayOutlined />}
           />
+          {!role&&(
           <Item
             title="Grade"
             path="/faq"
             colors={colors}
             icon={<HelpOutlineOutlined />}
-          />
+          />)}
+          {role&&(
+          <Item
+            title="Grade"
+            path="/studentGrade"
+            colors={colors}
+            icon={<HelpOutlineOutlined />}
+          />)}
         </Menu>
 
 

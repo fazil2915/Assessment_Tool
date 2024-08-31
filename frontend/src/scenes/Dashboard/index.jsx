@@ -31,6 +31,7 @@ function Dashboard() {
   const theme = useTheme();
   const user=useSelector((state)=>state.user)
   const colors = tokens(theme.palette.mode);
+  const role=user.role=== "student"
   const isXlDevices = useMediaQuery("(min-width: 1260px)");
   const isMdDevices = useMediaQuery("(min-width: 724px)");
   const isXsDevices = useMediaQuery("(max-width: 436px)");
@@ -77,6 +78,7 @@ function Dashboard() {
         gap="20px"
       >
         {/* Statistic Items */}
+        {!role && (
         <Box
           gridColumn="span 3"
           bgcolor={colors.primary[400]}
@@ -95,7 +97,28 @@ function Dashboard() {
               />
             }
           />
-        </Box>
+        </Box>)}
+        {role && (
+        <Box
+          gridColumn="span 3"
+          bgcolor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="1"
+            subtitle="Assessment Waiting"
+            progress="0.75"
+            increase="+14%"
+            icon={
+              <LibraryBooksRounded
+                sx={{ color: colors.blueAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>)}
+        {!role && (
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -114,7 +137,28 @@ function Dashboard() {
               />
             }
           />
-        </Box>
+        </Box>)}
+        {role && (
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="4"
+            subtitle="Course Enrolled"
+            progress="0.50"
+            increase="+21%"
+            icon={
+              <BookRounded
+                sx={{ color: colors.blueAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>)}
+        {!role &&(
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -133,7 +177,28 @@ function Dashboard() {
               />
             }
           />
-        </Box>
+        </Box>)}
+        {role &&(
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="3"
+            subtitle="Grade rate"
+            progress="0.30"
+            increase="+5%"
+            icon={
+              <LibraryBooksRounded
+              sx={{ color: colors.blueAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>)}
+        {!role && (
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -152,9 +217,29 @@ function Dashboard() {
               />
             }
           />
-        </Box>
+        </Box>)}
+        {role && (
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="1,325,134"
+            subtitle="Feedbacks"
+            progress="0.80"
+            increase="+43%"
+            icon={
+              <FeedbackRounded
+                sx={{ color: colors.blueAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>)}
       </Box>
-      <SideBar />
+      <SideBar role={role}/>
      <PieChart/>
     </Box>
   );

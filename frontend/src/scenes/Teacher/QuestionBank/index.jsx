@@ -10,45 +10,26 @@ const Question_Bank = () => {
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "Title", headerName: "Title" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "type",
+      headerName: "Type",
       flex: 1,
-      cellClassName: "name-column--cell",
+      cellClassName: "type-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "subject",
+      headerName: "Subject",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "category",
+      headerName: "Category",
       flex: 1,
     },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "Address",
-      flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
-    },
+    
   ];
   return (
     <Box m="20px">
@@ -63,15 +44,17 @@ const Question_Bank = () => {
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
+          
           },
           "& .MuiDataGrid-cell": {
             border: "none",
+            
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.blueAccent[600],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {

@@ -1041,3 +1041,17 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"204\",\"responseTime\":\"0.219\"}","timestamp":"2024-08-31T18:34:49.557Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"200\",\"responseTime\":\"276.449\"}","timestamp":"2024-08-31T18:34:49.839Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"200\",\"responseTime\":\"269.065\"}","timestamp":"2024-08-31T18:34:49.842Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"204\",\"responseTime\":\"14.302\"}","timestamp":"2024-08-31T20:19:38.266Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"204\",\"responseTime\":\"0.686\"}","timestamp":"2024-08-31T20:19:38.415Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"304\",\"responseTime\":\"406.288\"}","timestamp":"2024-08-31T20:19:38.692Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/getallstudents\",\"status\":\"304\",\"responseTime\":\"269.856\"}","timestamp":"2024-08-31T20:19:38.963Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/login\",\"status\":\"204\",\"responseTime\":\"5.649\"}","timestamp":"2024-08-31T20:40:49.226Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/teacher/login\",\"status\":\"500\",\"responseTime\":\"30179.585\"}","timestamp":"2024-08-31T20:41:19.423Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/login\",\"status\":\"204\",\"responseTime\":\"5.159\"}","timestamp":"2024-08-31T21:13:09.185Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/teacher/login\",\"status\":\"200\",\"responseTime\":\"2215.745\"}","timestamp":"2024-08-31T21:13:11.410Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/student/login\",\"status\":\"204\",\"responseTime\":\"0.260\"}","timestamp":"2024-08-31T21:19:44.333Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/student/login\",\"status\":\"200\",\"responseTime\":\"1290.154\"}","timestamp":"2024-08-31T21:19:45.627Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/student/login\",\"status\":\"204\",\"responseTime\":\"5.173\"}","timestamp":"2024-08-31T21:42:53.776Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/student/login\",\"status\":\"200\",\"responseTime\":\"732.836\"}","timestamp":"2024-08-31T21:42:54.522Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/student/login\",\"status\":\"204\",\"responseTime\":\"0.290\"}","timestamp":"2024-08-31T21:44:24.497Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/student/login\",\"status\":\"200\",\"responseTime\":\"464.297\"}","timestamp":"2024-08-31T21:44:24.965Z"}

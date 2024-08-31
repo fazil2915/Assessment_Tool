@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, MenuItem, IconButton,useTheme } from '@mui/material';
+import { Box, TextField, Button, MenuItem, IconButton, useTheme } from '@mui/material';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import AddIcon from '@mui/icons-material/Add';
@@ -7,6 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Header } from "@/components";
 import { useSelector } from 'react-redux';
 import { tokens } from '@/theme';
+import Question_Bank from '..';
 
 const initialValues = {
   title: '',
@@ -17,6 +18,7 @@ const initialValues = {
   subject: '',
   category: '',
   score: '',
+  isReusable: "",
   options: [{ option: '', is_Correct: false }],
   answer: ''
 };
@@ -27,6 +29,7 @@ const validationSchema = Yup.object().shape({
   resources: Yup.string().url('Invalid URL'),
   type: Yup.string().required('Required'),
   difficulty: Yup.string().required('Required'),
+  isReusable: Yup.string().required('Required'),
   subject: Yup.string().required('Required'),
   score: Yup.number().min(0, 'Must be positive').required('Required'),
   options: Yup.array().when('type', {
@@ -51,7 +54,8 @@ const QuestionForm = () => {
   const token = useSelector((state) => state.token);
 
   return (
-    <Box m="1rem">
+    <Box m="20px">
+      <Question_Bank />
       <Header title="Add Questions" />
       <Formik
         initialValues={initialValues}
@@ -75,7 +79,7 @@ const QuestionForm = () => {
               gap="20px"
               gridTemplateColumns="repeat(1, 1fr)"
               p="2rem"
-              sx={{ border: '1px solid #ddd', borderRadius: '8px' }}
+              sx={{ border: '1px', borderRadius: '8px' }}
             >
               <TextField
                 fullWidth
@@ -86,9 +90,64 @@ const QuestionForm = () => {
                 onChange={handleChange}
                 value={values.title}
                 name="title"
-                error={touched.title && errors.title}
+                error={touched.title && Boolean(errors.title)}
                 helperText={touched.title && errors.title}
               />
+              <TextField
+                fullWidth
+                select
+                label="Difficulty"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.difficulty}
+                name="difficulty"
+                error={touched.difficulty && Boolean(errors.difficulty)}
+                helperText={touched.difficulty && errors.difficulty}
+              >
+                <MenuItem value="Easy">Easy</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="Hard">Hard</MenuItem>
+              </TextField>
+
+              <TextField
+                fullWidth
+                variant="outlined"
+                type="text"
+                label="Subject"
+                onBlur={handleBlur} 
+                onChange={handleChange}
+                value={values.subject}
+                name="subject" 
+                error={touched.subject && Boolean(errors.subject)}
+                helperText={touched.subject && errors.subject} 
+              />
+
+              <TextField
+                fullWidth
+                variant="outlined"
+                type="text"
+                label="Category"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.category}
+                name="category"
+                error={touched.category && Boolean(errors.category)}
+                helperText={touched.category && errors.category}
+              />
+              <TextField
+                fullWidth
+                select
+                label="Add to Question Bank"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.isReusable}
+                name="isReusable"
+                error={touched.isReusable && Boolean(errors.isReusable)}
+                helperText={touched.isReusable && errors.isReusable}
+              >
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
+              </TextField>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -98,7 +157,7 @@ const QuestionForm = () => {
                 onChange={handleChange}
                 value={values.description}
                 name="description"
-                error={touched.description && errors.description}
+                error={touched.description && Boolean(errors.description)}
                 helperText={touched.description && errors.description}
               />
               <TextField
@@ -110,7 +169,7 @@ const QuestionForm = () => {
                 onChange={handleChange}
                 value={values.resources}
                 name="resources"
-                error={touched.resources && errors.resources}
+                error={touched.resources && Boolean(errors.resources)}
                 helperText={touched.resources && errors.resources}
               />
               <TextField
@@ -125,7 +184,7 @@ const QuestionForm = () => {
                 }}
                 value={values.type}
                 name="type"
-                error={touched.type && errors.type}
+                error={touched.type && Boolean(errors.type)}
                 helperText={touched.type && errors.type}
               >
                 <MenuItem value="Multiple">Multiple Choice</MenuItem>
@@ -189,9 +248,11 @@ const QuestionForm = () => {
                         <MenuItem value="false">No</MenuItem>
                       </TextField>
                       <IconButton
+                        color="error"
                         onClick={() => {
-                          const options = [...values.options];
-                          options.splice(index, 1);
+                          const options = values.options.filter(
+                            (_, i) => i !== index
+                          );
                           setFieldValue('options', options);
                         }}
                       >
@@ -200,23 +261,19 @@ const QuestionForm = () => {
                     </Box>
                   ))}
                   <Button
-                    type="button"
                     variant="contained"
-                    sx={{backgroundColor:colors.greenAccent[600]}}
-                    startIcon={<AddIcon />}
+                    sx={{backgroundColor:colors.blueAccent[600]}}
                     onClick={() => {
-                      setFieldValue('options', [
-                        ...values.options,
-                        { option: '', is_Correct: false }
-                      ]);
+                      const options = [...values.options, { option: '', is_Correct: false }];
+                      setFieldValue('options', options);
                     }}
                   >
-                    Add Option
+                    <AddIcon /> Add Option
                   </Button>
                 </Box>
               )}
 
-              {['Essay', 'short Answer'].includes(questionType) && (
+              {(questionType === 'Essay' || questionType === 'short Answer') && (
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -226,19 +283,33 @@ const QuestionForm = () => {
                   onChange={handleChange}
                   value={values.answer}
                   name="answer"
-                  error={touched.answer && errors.answer}
+                  error={touched.answer && Boolean(errors.answer)}
                   helperText={touched.answer && errors.answer}
                 />
               )}
-            </Box>
-            <Box mt="2rem" textAlign="center">
-              <Button
-                type="submit"
-                sx={{ backgroundColor:colors.blueAccent[600] }}
-                variant="contained"
-              >
-                Add Question
-              </Button>
+
+              <TextField
+                fullWidth
+                variant="outlined"
+                type="number"
+                label="Score"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.score}
+                name="score"
+                error={touched.score && Boolean(errors.score)}
+                helperText={touched.score && errors.score}
+              />
+
+              <Box display="flex" gap="20px" justifyContent="flex-end">
+                <Button
+                  type="submit"
+                  variant="contained"
+                 sx={{backgroundColor:colors.blueAccent[600]}}
+                >
+                  Submit
+                </Button>
+              </Box>
             </Box>
           </form>
         )}

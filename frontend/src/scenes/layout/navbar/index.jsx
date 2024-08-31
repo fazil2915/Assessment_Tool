@@ -20,8 +20,10 @@ import {tokens} from "@/theme"
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setMode,setLogout } from "@/state";
+import { useNavigate } from "react-router-dom";
 const Navbar = ({ onMenuToggle }) => {
   const theme = useTheme();
+  const navigate=useNavigate()
   const colors=tokens(theme.palette.mode);
   const user=useSelector((state)=>state.user)
   const dispatch = useDispatch();
@@ -33,6 +35,10 @@ const Navbar = ({ onMenuToggle }) => {
   const handleMenuToggle = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
+
+  const handleClick=()=>{
+    navigate("/dash")
+  }
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       <Box display="flex" alignItems="center" gap={2}>
@@ -43,6 +49,7 @@ const Navbar = ({ onMenuToggle }) => {
         )}
         {!isXsDevices && (
           <Box display="flex" alignItems="center" bgcolor="primary" borderRadius="3px">
+            <Typography onClick={handleClick} sx={{color:colors.blueAccent[600],fontSize:"1.5rem" ,fontWeight:"bold",cursor:"pointer"}}>Assessment Tool</Typography>
             <InputBase placeholder="Search" sx={{ ml: 2, flex: 1 }} />
             <IconButton type="button">
               <SearchOutlined />

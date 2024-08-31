@@ -13,6 +13,9 @@ import Contacts from '@/scenes/Teacher/Assessment';
 import Question_Bank from '@/scenes/Teacher/QuestionBank';
 import CreateAssessment from "@/scenes/Teacher/Assessment/aessessmentForm"
 import QuestionForm from "@/scenes/Teacher/QuestionBank/AddQuestion"
+import TeacherSubmission from './scenes/Teacher/submission';
+
+import StudentAssessment from '@/scenes/Students/Assessment';
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -25,13 +28,17 @@ function App() {
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="/" element={<Layout/>}>
+          {/* Teacher Route*/}
             <Route path="/dash" element={<Dashboard />} />
             <Route path='/course' element={<CourseForm/>}/>
             <Route path="/assessment" element={<Contacts/>}/>
             <Route path="/question_bank" element={<Question_Bank/>}/>
             <Route path='/create_assessment' element={<CreateAssessment/>}/>
             <Route path='/addquestion' element={<QuestionForm/>}/>
-            {/* Add more routes here */}
+            <Route path='/teachersubmission' element={<TeacherSubmission/>}/>
+
+           {/* Students Route*/}
+           <Route path='/studentAssessment' element={<StudentAssessment/>}/>
           </Route>
         </Routes>
       </ThemeProvider>
