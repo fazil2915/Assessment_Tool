@@ -1,4 +1,4 @@
-import {Course, Teacher,Assessment, Question,Submission} from "../database/index.js"
+import {Course, Teacher,Assessment, Question,Submission,Student} from "../database/index.js"
 import mongoose from "mongoose"
 //course
 export const createCourse=async (req,res)=>{
@@ -25,58 +25,61 @@ export const createCourse=async (req,res)=>{
 }
 
 //assessment
-export const createAsessment=async (req,res)=>{
-  
+export const createAsessment = async (req, res) => {
   try {
-    const {id:teach_id}=req.params
-    const teacher=await Teacher.findById(teach_id)
-    if(!teacher){
-    return res.status(404).json({message:"teacher not found!!"})
-  }
-    const{
-      title,
-      instruction,
-      type,
-      grading_options,
-      question_bank,
-      attachment,
-      visibility,
-      status,
-      attempt,
-      feedback,
-      recent_Activities,
-      scheduled_at,
-      due,
-      time_limit
-  
-    }=req.body
-    
-    const newAssessment=new Assessment({
-      title,
-      instruction,
-      type,
-      grading_options,
-      question_bank,
-      attachment,
-      visibility,
-      status,
-      attempt,
-      feedback,
-      recent_Activities,
-      scheduled_at:status==="Published" && scheduled_at? scheduled_at:null,
-      due,
-      time_limit,
-      teacher_id:teach_id
-    })
-    const savedAsessment= await newAssessment.save();
+      const { id: teach_id } = req.params;
+      const teacher = await Teacher.findById(teach_id);
 
-    res.status(201).json(savedAsessment)
+      if (!teacher) {
+          return res.status(404).json({ message: "Teacher not found!" });
+      }
+
+      const {
+          title,
+          instruction,
+          type,
+          grading_options,
+          question_bank,
+          attachment,
+          visibility,
+          status,
+          attempt,
+          feedback,
+          recent_Activities,
+          scheduled_at,
+          due,
+          time_limit
+      } = req.body;
+
+      // Ensure dates are parsed correctly
+      const parsedScheduledAt = scheduled_at ? new Date(scheduled_at) : null;
+      const parsedDue = due ? new Date(due) : null;
+
+      const newAssessment = new Assessment({
+          title,
+          instruction,
+          type,
+          grading_options,
+          question_bank,
+          attachment,
+          visibility,
+          status,
+          attempt,
+          feedback,
+          recent_Activities,
+          scheduled_at: status === "Published" && parsedScheduledAt ? parsedScheduledAt : null,
+          due: parsedDue,
+          time_limit,
+          teacher_id: teach_id
+      });
+
+      const savedAssessment = await newAssessment.save();
+      res.status(201).json(savedAssessment);
   } catch (error) {
-    res.status(500).json({err:error.message})
+      console.error("Error creating assessment:", error.message);
+      res.status(500).json({ err: error.message });
   }
-  
-}
-
+};
 export const addResource=async (req,res)=>{
   try {
     const assess_Id=req.params.id;
@@ -267,7 +270,17 @@ export const addQuestionToAsses = async (req, res) => {
 };
 
 
-
+export const getallstudents=async(req,res)=>{
+  try {
+    const users=await Student.find()
+    if(!users){
+      res.status(404).json({meassage:"Not found!!"})
+    }
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({err:error.message})   
+  }
+}
 
 //submission
 //get submission done by the student

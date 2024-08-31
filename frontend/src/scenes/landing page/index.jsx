@@ -19,7 +19,7 @@ const LandingPage = () => {
     <Box>
       {currentView === 'landing' && (
         <>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ display:"flex",justifyContent:"c",alignContent:"center"}}>
+          <Typography variant="h4" component="h1" gutterBottom sx={{ display:"flex",justifyContent:"center",alignContent:"center"}}>
             Welcome to the Assessment Portal
           </Typography>
           <Box display="flex" justifyContent="space-around" mt={4}>

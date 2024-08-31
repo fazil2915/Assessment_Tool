@@ -61,8 +61,9 @@ const Form = () => {
     const savedUserResponse = await fetch(
       `http://localhost:8000/api/student/register`,
       {
-        method: "POST",
-        body: formData,
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
       }
     );
     const savedUser = await savedUserResponse.json();

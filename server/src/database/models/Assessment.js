@@ -30,7 +30,7 @@ const AssessmentSchema = new mongoose.Schema({
     attachment: {
         type: Schema.Types.ObjectId,
         ref: 'Course',
-        required: true
+        
     },
     visibility: [
         {
@@ -59,11 +59,11 @@ const AssessmentSchema = new mongoose.Schema({
         timestamp: { type: Date, default: Date.now },
         performed_by: { type: Schema.Types.ObjectId, ref: "User" }
     },
-    scheduled_at: Date, // Fixed typo from 'sheduled_at' to 'scheduled_at'
-    due: Date,
-    time_limit: Number
+    scheduled_at: { type: Date, default: null },
+    due: { type: Date },
+    time_limit: Number,
 }, {
-    timestamps: true // Added this outside the schema definition to automatically handle createdAt and updatedAt
+    timestamps: true 
 });
 
 const Assessment = mongoose.model('Assessment', AssessmentSchema);

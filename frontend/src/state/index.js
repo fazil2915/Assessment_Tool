@@ -27,9 +27,12 @@ const authSlice= createSlice({
           },
           setCourse:(state,action)=>{
             state.course=action.payload.course
+          },
+          setAsessment:(state,action)=>{
+            state.assessment=action.payload.assessment
           }
     }
 });
 
-export const {setLogin,setLogout,setMode,setCourse}=authSlice.actions;
+export const {setLogin,setLogout,setMode,setCourse,setAsessment}=authSlice.actions;
 export default authSlice.reducer;

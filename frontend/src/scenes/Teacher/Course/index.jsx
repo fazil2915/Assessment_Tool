@@ -40,9 +40,9 @@ const CourseForm = () => {
   
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const getCourse=async (values)=>{
+  // const getCourse=async (values)=>{
     
-  }
+  // }
  
   const createCourse = async (values, onSubmitProps) => {
     const formData = new FormData();

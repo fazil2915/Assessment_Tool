@@ -62,7 +62,8 @@ const Form = () => {
       `http://localhost:8000/api/teacher/register`,
       {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
       }
     );
     const savedUser = await savedUserResponse.json();
@@ -162,6 +163,7 @@ const Form = () => {
                 </TextField>
                 <TextField
                   label="password"
+                  type="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.password}

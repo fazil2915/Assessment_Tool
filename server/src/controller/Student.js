@@ -1,5 +1,5 @@
 
-import {Assessment,Submission} from "../database/index.js";
+import {Assessment,Student,Submission} from "../database/index.js";
 
 export const getAssessment=async(req,res)=>{
     try {
@@ -17,6 +17,8 @@ export const getAssessment=async(req,res)=>{
      res.status(500).json({err:error.message})        
     }
 }
+//getallstudents
+
 
 export const getOverdueAssessments = async (req, res) => {
     try {

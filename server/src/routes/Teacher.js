@@ -9,7 +9,8 @@ import { createCourse,
          getAssessment,
          createQuestion,
          getQuestions,
-         addQuestionToAsses
+         addQuestionToAsses,
+         getallstudents
           } from "../controller/Teacher.js"
 const router=express.Router()
 
@@ -18,6 +19,7 @@ router.post('/register',register);
 router.post('/login',login)
 router.post('/course/:teach_id',verifyToken,createCourse)
 router.post("/assessment/:id",verifyToken,createAsessment)
+router.get('/getallstudents',verifyToken,getallstudents)
 router.put('/assessment/:id/addresource',verifyToken,addResource)
 router.put('/assessment/:id/update',verifyToken,updateAssessment)
 router.delete("/assessment/:id/delete",verifyToken,deleteAssessment)

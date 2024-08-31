@@ -1,12 +1,18 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, Button } from "@mui/material";
 import { Header } from "@/components";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { mockDataContacts } from "@/data/mockData";
-import {tokens} from "@/theme"
+import { tokens } from "@/theme"
+import {  useNavigate } from "react-router-dom";
 
 const Contacts = () => {
   const theme = useTheme();
+  const navigate=useNavigate()
   const colors = tokens(theme.palette.mode);
+
+  const handleClick=()=>{
+    navigate('/create_assessment')
+  }
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
@@ -50,12 +56,17 @@ const Contacts = () => {
       flex: 1,
     },
   ];
+
+  //const createAssessment=
   return (
     <Box m="20px">
       <Header
         title="ASSESSMENTS"
         subtitle="List of Assessments have done"
       />
+      <Button type="submit" sx={{ backgroundColor: colors.blueAccent[600] }} variant="contained" onClick={handleClick}>
+        Create Assessment
+      </Button>
       <Box
         mt="40px"
         height="75vh"
