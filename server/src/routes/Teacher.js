@@ -11,7 +11,8 @@ import { createCourse,
          getQuestions,
          addQuestionToAsses,
          getallstudents,
-         getPublishedAssessments
+         getPublishedAssessments,
+         getAggregatedData
           } from "../controller/Teacher.js"
 const router=express.Router()
 
@@ -29,4 +30,5 @@ router.post('/assessment/:teacher_id/createQuestion',verifyToken,createQuestion)
 router.get("/assessment/getAllQuestion",verifyToken,getQuestions)
 router.patch("/assessment/:assess_Id/toBank/:id",verifyToken,addQuestionToAsses)
 router.get('/assessment/:id/getpublished',verifyToken,getPublishedAssessments)
+router.get('/pipeline',verifyToken,getAggregatedData)
 export default router;

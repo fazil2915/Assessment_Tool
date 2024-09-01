@@ -12,6 +12,11 @@ import StudentRoutes from "./routes/Student.js"
 const app=express();
 dotenv.config()
 
+const corsOptions = {
+  origin: 'http://localhost:5173', 
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 //Routes
 const morganFormat = ":method :url :status :response-time ms";
@@ -34,7 +39,7 @@ app.use(
 app.use(express.json());
 app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 //api  
