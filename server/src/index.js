@@ -12,11 +12,11 @@ import StudentRoutes from "./routes/Student.js"
 const app=express();
 dotenv.config()
 
-// const corsOptions = {
-//   origin: process.env.frontend, 
-//   methods: ['GET', 'POST','PATCH','PUT','DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// };
+const corsOptions = {
+  origin: "https://assessment-tool-nmyz.vercel.app", 
+  methods: ['GET', 'POST','PATCH','PUT','DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 //Routes
 const morganFormat = ":method :url :status :response-time ms";
