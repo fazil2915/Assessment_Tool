@@ -93,7 +93,7 @@ const QuestionForm = () => {
    
   const addQuestion = async (values, onSubmitProps) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/teacher/assessment/${user._id}/createQuestion`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/${user._id}/createQuestion`, {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
@@ -118,7 +118,7 @@ const QuestionForm = () => {
   //Publish
   const publish=async ()=>{
     try {
-      const user=await fetch(`http://localhost:8000/api/teacher/assessment/${assessment._id}/update`,{
+      const user=await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/${assessment._id}/update`,{
         method:"PUT",
         headers:{
           'Authorization': `Bearer ${token}`,
