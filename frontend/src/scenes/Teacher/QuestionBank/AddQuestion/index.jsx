@@ -147,11 +147,11 @@ const QuestionForm = () => {
     }
   return (
     <Box m="20px">
+     
       <Box  display="flex" justifyContent="start">
       <Button onClick={handleClick}justifyContent="end"sx={{backgroundColor:colors.greenAccent[600],
         color:"black",width:"6rem" ,height:"3rem", fontSize:"1rem"}}>Publish</Button>
       </Box>
-      
       <Question_Bank />
       <Header title="Add Questions" />
       <Formik

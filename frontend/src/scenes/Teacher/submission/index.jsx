@@ -19,7 +19,7 @@ const TeacherSubmission = () => {
     const colors = tokens(theme.palette.mode);
     const token = useSelector((state) => state.token);
     const user = useSelector((state) => state.user);
-    console.log(user);
+ 
     
 
     // State to hold the fetched courses

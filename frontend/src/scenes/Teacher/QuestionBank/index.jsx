@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setAsessment } from "@/state";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -29,6 +30,7 @@ const Question_Bank = () => {
   const colors = tokens(theme.palette.mode);
   const assessment = useSelector((state) => state.assessment)
   const dispatch = useDispatch()
+  const navigate=useNavigate()
 
   const token = useSelector((state) => state.token)
   const [questions, setQuestions] = useState([])
@@ -38,24 +40,22 @@ const Question_Bank = () => {
     { field: "type", headerName: "Type", flex: 1 },
     { field: "subject", headerName: "Subject", flex: 1 },
     { field: "category", headerName: "Category", flex: 1 },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      width: 150,
-      renderCell: (params) => (
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: colors.greenAccent[600] }}
-          onClick={() => addToAssessment(params.row.id)}
-        >
-          Add
-        </Button>
-
-
-
-      )
-    },
-  ];
+  // Conditionally add the Actions column if `assessment` is true
+  ...(assessment ? [{
+    field: 'actions',
+    headerName: 'Actions',
+    width: 150,
+    renderCell: (params) => (
+      <Button
+        variant="contained"
+        sx={{ backgroundColor: colors.greenAccent[600] }}
+        onClick={() => addToAssessment(params.row.id)}
+      >
+        Add
+      </Button>
+    )
+  }] : [])
+];
                     
   useEffect(() => {
     getQuestions()
@@ -82,6 +82,10 @@ const addToAssessment = async (questionId) => {
   } catch (error) {
     console.error("Failed to fetch questions:", error);
   }
+}
+
+const handleclick=()=>{
+navigate('/addquestion')
 }
 
 // Fetch all questions

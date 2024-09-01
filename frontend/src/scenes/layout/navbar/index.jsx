@@ -39,6 +39,7 @@ const Navbar = ({ onMenuToggle }) => {
   const handleClick=()=>{
     navigate("/dash")
   }
+  const displayLetter = user && user.name ? user.name[0].toUpperCase() : '?';
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       <Box display="flex" alignItems="center" gap={2}>
@@ -58,7 +59,8 @@ const Navbar = ({ onMenuToggle }) => {
         )}
       </Box>
       <Box display="flex" alignItems="center">
-        <Avatar sx={{bgcolor:colors.blueAccent[600]}}>{`${user.name[0]}`}</Avatar>
+
+        <Avatar sx={{bgcolor:colors.blueAccent[600]}}>{displayLetter}</Avatar>
         <IconButton onClick={()=> dispatch(setMode())} >
           {theme.palette.mode === "dark" ?  <DarkModeOutlined sx={{width:"1.5rem",height:"1.5rem"}}/>: <LightModeOutlined sx={{width:"1.5rem",height:"1.5rem"}}/>}
         </IconButton>
@@ -70,10 +72,12 @@ const Navbar = ({ onMenuToggle }) => {
         open={Boolean(anchorEl)}
         onClose={handleMenuToggle}
       >
-        <MenuItem onClick={handleMenuToggle}>{`${user.name}`}</MenuItem>
+        <MenuItem onClick={handleMenuToggle}>{`${user?user.name:""}`}</MenuItem>
         <MenuItem
           onClick={() => {
-            dispatch(setLogout());
+            dispatch(setLogout({
+              navigate:"/"
+            }));
             handleMenuToggle();
           }}
         >
