@@ -3,7 +3,7 @@ import {
   Button,
   IconButton,
   Typography,
-
+  Grid,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -13,6 +13,7 @@ import {
   LineChart,
   ProgressCircle,
   BarChart,
+  PieChart,
   GeographyChart,
 } from "../../components";
 import {
@@ -20,12 +21,12 @@ import {
   PersonAddRounded,
   BookRounded,
   LibraryBooksRounded,
-  FeedbackRounded
+  FeedbackRounded,
 } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { tokens } from "@/theme";
 import SideBar from "../layout/sidebar";
-import { PieChart } from "@/components";
+ 
 
 function Dashboard() {
   const theme = useTheme();
@@ -239,8 +240,17 @@ function Dashboard() {
           />
         </Box>)}
       </Box>
-      <SideBar role={role}/>
-     <PieChart/>
+      <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={3}>
+          <SideBar role={role} />
+        </Grid>
+        <Grid item xs={12} md={9} mt={20}> 
+          <BarChart isDashboard={true} />
+        </Grid>
+      </Grid>
+    </Box>
+   
     </Box>
   );
 }

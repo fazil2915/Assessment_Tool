@@ -311,7 +311,47 @@ export const getallstudents=async(req,res)=>{
     res.status(500).json({err:error.message})   
   }
 }
+export const getAggregatedData = async (req, res) => {
+  try {
+    const aggregationPipeline = [
+      {
+        $group: {
+          _id: {
+            type: "$type",
+            gradingOptions: "$grading_options.type"
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $group: {
+          _id: "$_id.type",
+          gradingOptions: {
+            $push: {
+              option: "$_id.gradingOptions",
+              count: "$count"
+            }
+          },
+          total: { $sum: "$count" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          type: "$_id",
+          gradingOptions: 1,
+          total: 1
+        }
+      }
+    ];
 
+    const data = await Assessment.aggregate(aggregationPipeline);
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error fetching aggregated data:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 //submission
 //get submission done by the student
 

@@ -1,12 +1,46 @@
-/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { mockLineData as data } from "../data/mockData";
+import { useSelector } from "react-redux";
 
 const LineChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const token = useSelector((state) => state.token); 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/teacher/pipeline", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+
+      // Format data for Nivo
+      const formattedData = result.map((item) => ({
+        id: item.id, // or any unique identifier
+        color: colors.primary[500],
+        data: item.data.map((point) => ({
+          x: point.x, // replace with your x-value key
+          y: point.y, // replace with your y-value key
+        })),
+      }));
+
+      setData(formattedData);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  };
 
   return (
     <ResponsiveLine
@@ -44,7 +78,7 @@ const LineChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
+      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
@@ -63,17 +97,17 @@ const LineChart = ({ isDashboard = false }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "transportation", // added
+        legend: isDashboard ? undefined : "X Axis Label", // Customize as needed
         legendOffset: 36,
         legendPosition: "middle",
       }}
       axisLeft={{
         orient: "left",
-        tickValues: 5, // added
+        tickValues: 5,
         tickSize: 3,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "count", // added
+        legend: isDashboard ? undefined : "Y Axis Label", // Customize as needed
         legendOffset: -40,
         legendPosition: "middle",
       }}

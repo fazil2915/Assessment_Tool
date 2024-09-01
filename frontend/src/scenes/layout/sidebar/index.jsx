@@ -194,12 +194,12 @@ const SideBar = ({role}) => {
         </Menu>
 
 
-        {/* <Typography
+        <Typography
           variant="h6"
           color={colors.gray[300]}
           sx={{ m: "15px 0 5px 20px" }}
         >
-          {!collapsed ? "Charts" : " "}
+          {!collapsed ? "Analytics" : " "}
         </Typography>
         <Menu
           menuItemStyles={{
@@ -213,12 +213,12 @@ const SideBar = ({role}) => {
           }}
         >
           <Item
-            title="Bar Chart"
+            title="Charts"
             path="/bar"
             colors={colors}
             icon={<BarChartOutlined />}
           />
-          <Item
+          {/* <Item
             title="Pie Chart"
             path="/pie"
             colors={colors}
@@ -241,8 +241,8 @@ const SideBar = ({role}) => {
             path="/stream"
             colors={colors}
             icon={<WavesOutlined />}
-          />
-        </Menu> */}
+          /> */}
+        </Menu>
       </Box>
      
     </Sidebar>
