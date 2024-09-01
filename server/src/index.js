@@ -13,7 +13,7 @@ const app=express();
 dotenv.config()
 
 const corsOptions = {
-  origin: 'http://localhost:5173', 
+  origin: process.env.frontend, 
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
