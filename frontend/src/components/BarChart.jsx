@@ -16,7 +16,7 @@ const BarChart = ({ isDashboard = false }) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/teacher/pipeline', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/pipeline`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
