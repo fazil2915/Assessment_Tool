@@ -8,9 +8,13 @@ import { Header } from "@/components";
 import { useSelector } from 'react-redux';
 import { tokens } from '@/theme';
 import Question_Bank from '..';
-
+import { useDispatch } from 'react-redux';
+import { setAsessment } from '@/state';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 const initialValues = {
-  title: '',
+  text: '',
   description: '',
   resources: '',
   type: '',
@@ -24,45 +28,137 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required('Required'),
-  description: Yup.string().required('Required'),
+  text: Yup.string().required('Title is required'),
   resources: Yup.string().url('Invalid URL'),
-  type: Yup.string().required('Required'),
-  difficulty: Yup.string().required('Required'),
-  isReusable: Yup.string().required('Required'),
-  subject: Yup.string().required('Required'),
-  score: Yup.number().min(0, 'Must be positive').required('Required'),
-  options: Yup.array().when('type', {
-    is: 'Multiple',
-    then: Yup.array().of(
-      Yup.object().shape({
-        option: Yup.string().required('Option text is required'),
-        is_Correct: Yup.boolean()
-      })
-    ).required('Options are required')
-  }),
-  answer: Yup.string().when('type', {
-    is: val => ['Essay', 'short Answer'].includes(val),
-    then: Yup.string().required('Answer is required')
-  })
+  type: Yup.string().required('Type is required'),
+  difficulty: Yup.string().required('Difficulty is required'),
+  isReusable: Yup.string().required('Reusable status is required'),
+  subject: Yup.string().required('Subject is required'),
+  category: Yup.string().required('Category is required'),
+  score: Yup.number().min(0, 'Score must be positive').required('Score is required'),
+
+  //Conditional validation for options based on type
+  // options: Yup.array().when('type', {
+  //   is: 'Multiple', // If type is 'Multiple'
+  //   then: Yup.array()
+  //     .of(
+  //       Yup.object().shape({
+  //         option: Yup.string().required('Option is required'),
+  //         is_Correct: Yup.boolean().required('Correct status is required')
+  //       })
+  //     )
+  //     .min(1, 'At least one option is required'),
+  //   otherwise: Yup.array().of(
+  //     Yup.object().shape({
+  //       option: Yup.string().nullable(),
+  //       is_Correct: Yup.boolean().nullable()
+  //     })
+  //   ).nullable() // When type is not 'Multiple', options can be null or an empty array
+  // }),
+
+  // // Conditional validation for answer based on type
+  // answer: Yup.string().when('type', {
+  //   is: (type) => ['Essay', 'short Answer'].includes(type),
+  //   then: Yup.string().required('Answer is required'),
+  //   otherwise: Yup.string().nullable() // When type is not 'Essay' or 'short Answer', answer can be null
+  // })
 });
+const notify = () => {
+  toast.success('Question Added', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+}
+
+
 
 const QuestionForm = () => {
   const [questionType, setQuestionType] = useState('');
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const token = useSelector((state) => state.token);
+  const user=useSelector((state)=>state.user)
+  const assessment = useSelector((state) => state.assessment)
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
 
+  
+  const token = useSelector((state) => state.token);
+   
+  const addQuestion = async (values, onSubmitProps) => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/teacher/assessment/${user._id}/createQuestion`, {
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        onSubmitProps.resetForm();
+        //console.log(data);
+      } else {
+        const error = await response.json();
+        console.error('Error creating question:', error);
+      }
+    } catch (error) {
+      console.error('Failed to fetch questions:', error);
+    }
+  };
+
+  //Publish
+  const publish=async ()=>{
+    try {
+      const user=await fetch(`http://localhost:8000/api/teacher/assessment/${assessment._id}/update`,{
+        method:"PUT",
+        headers:{
+          'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        }
+        , body: JSON.stringify({ status: "Published" }),
+      })
+      const result=await user.json()
+     dispatch(setAsessment({
+      assessment:result
+     }))
+     notify()
+     navigate("/dash")
+    } catch (error) {
+      console.error('Failed to fetch questions:', error);
+    }
+  }
+  
+  const handleFormSubmit=async(values,onSubmitProps)=>{
+    await addQuestion(values,onSubmitProps)
+    console.log(values);
+    }
+
+    const handleClick=()=>{
+      publish()
+    }
   return (
     <Box m="20px">
+      <Box  display="flex" justifyContent="start">
+      <Button onClick={handleClick}justifyContent="end"sx={{backgroundColor:colors.greenAccent[600],
+        color:"black",width:"6rem" ,height:"3rem", fontSize:"1rem"}}>Publish</Button>
+      </Box>
+      
       <Question_Bank />
       <Header title="Add Questions" />
       <Formik
+        onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+       
       >
         {({
           values,
@@ -85,13 +181,13 @@ const QuestionForm = () => {
                 fullWidth
                 variant="outlined"
                 type="text"
-                label="Title"
+                label="Question"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.title}
-                name="title"
-                error={touched.title && Boolean(errors.title)}
-                helperText={touched.title && errors.title}
+                value={values.text}
+                name="text"
+                error={touched.text && Boolean(errors.text)}
+                helperText={touched.text && errors.text}
               />
               <TextField
                 fullWidth
@@ -148,18 +244,7 @@ const QuestionForm = () => {
                 <MenuItem value="true">Yes</MenuItem>
                 <MenuItem value="false">No</MenuItem>
               </TextField>
-              <TextField
-                fullWidth
-                variant="outlined"
-                type="text"
-                label="Description"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.description}
-                name="description"
-                error={touched.description && Boolean(errors.description)}
-                helperText={touched.description && errors.description}
-              />
+           
               <TextField
                 fullWidth
                 variant="outlined"
@@ -314,6 +399,19 @@ const QuestionForm = () => {
           </form>
         )}
       </Formik>
+      <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+    transition={Bounce}
+  />
     </Box>
   );
 };

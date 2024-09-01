@@ -15,7 +15,21 @@ import { setAsessment } from "@/state";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+const notify = () => {
+    toast.success('Assessment created as draft', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+    });
+}
 
 const initialValues = {
     title: "",
@@ -23,7 +37,7 @@ const initialValues = {
     type: "",
     grading_options: {
         type: "",
-       
+
     },
     status: "",
     attempt: "",
@@ -59,6 +73,7 @@ const createAssessment = () => {
 
     useEffect(() => {
         getAsessment()
+     
     }, [])
 
     //get assessment fom api
@@ -125,6 +140,8 @@ const createAssessment = () => {
                         assessment: loggedIn
                     })
                 );
+                notify();
+                navigate('/addQuestion')
             } else {
                 console.error("Error creating assessment:", loggedIn.message || loggedIn.error);
             }
@@ -138,9 +155,10 @@ const createAssessment = () => {
         console.log(values);
         await createAssessment(values, onSubmitProps);
     };
-    const handleQuestion = () => {
-        navigate('/addQuestion')
-    }
+    // const handleQuestion = () => {
+    //     navigate('/addQuestion')
+    //     notify()
+    // }
 
     return (
         <Box m="20px">
@@ -209,7 +227,7 @@ const createAssessment = () => {
                                 helperText={touched.type && errors.type}
                                 sx={{ gridColumn: "span 4" }}
                             >
-                                <MenuItem value="Quiz">Quiz</MenuItem>
+                                <MenuItem value="quiz">Quiz</MenuItem>
                                 <MenuItem value="Assignment">Assignment</MenuItem>
                                 <MenuItem value="Exercise">Exercise</MenuItem>
                             </TextField>
@@ -364,25 +382,39 @@ const createAssessment = () => {
                                 </Box>
                             </LocalizationProvider>
                         </Box>
-                        <Box
-                            display="flex"
-                            justifyContent="end"
-                            mt="20px"
-                        >
-                            <Button type="submit" color="primary" sx={{
-                                backgroundColor: colors.greenAccent[600],
-                                mr: "10px", fontSize: "14px"
-                            }} variant="contained" onClick={handleQuestion}>
+                        <Box display="flex" justifyContent="end" mt="20px">
+
+                            <Button
+                                type="submit"
+                                color="primary"
+                                sx={{
+                                    backgroundColor: colors.greenAccent[600],
+                                    mr: "10px",
+                                    fontSize: "14px"
+                                }}
+                                variant="contained"
+                            >
                                 Add Question
+                                <ToastContainer
+                                    position="top-right"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme="dark"
+                                    transition={Bounce}
+                                />
                             </Button>
 
-                            <Button type="submit" sx={{ backgroundColor: colors.blueAccent[600], fontSize: "14px" }} variant="contained">
-                                Create New Assessment
-                            </Button>
                         </Box>
                     </form>
                 )}
             </Formik>
+
         </Box>
     );
 };

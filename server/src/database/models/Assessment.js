@@ -61,6 +61,7 @@ const AssessmentSchema = new mongoose.Schema({
     },
     scheduled_at: { type: Date, default: null },
     due: { type: Date },
+    isArchived:{type:Boolean,default:false},
     time_limit: Number,
 }, {
     timestamps: true 

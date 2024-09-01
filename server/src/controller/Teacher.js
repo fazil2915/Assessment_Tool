@@ -167,6 +167,34 @@ export const getAssessment=async (req,res)=>{
     res.status(500).json({err:error.message})
   }
 }
+//get assessment specific
+export const getPublishedAssessments = async (req, res) => {
+  try {
+    const { id: teacher_id } = req.params;
+
+    // Check if the teacher exists
+    const teacher = await Teacher.findById(teacher_id);
+    if (!teacher) {
+      return res.status(404).json({ message: "Teacher not found!" });
+    }
+
+    // Fetch assessments with status "Published" that belong to this teacher
+    const assessments = await Assessment.find({ teacher_id, status: "Published" })
+      .populate('question_bank')
+      .populate('attachment')
+      .populate('visibility')
+      .exec();
+
+    if (assessments.length === 0) {
+      return res.status(404).json({ message: "No published assessments found for this teacher!" });
+    }
+
+    res.status(200).json(assessments);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 export const deleteAssessment=async (req,res)=>{
   try {
@@ -198,6 +226,7 @@ export const createQuestion=async (req,res)=>{
       score,
       options,
       answer,
+      resources,
       isReusable
     } = req.body;
     const teacherExists = await Teacher.findById(teacher_id)
@@ -214,6 +243,7 @@ export const createQuestion=async (req,res)=>{
     score,
     options,
     answer,
+    resources,
     isReusable
   });
    

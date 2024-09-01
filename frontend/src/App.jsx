@@ -14,7 +14,7 @@ import Question_Bank from '@/scenes/Teacher/QuestionBank';
 import CreateAssessment from "@/scenes/Teacher/Assessment/aessessmentForm"
 import QuestionForm from "@/scenes/Teacher/QuestionBank/AddQuestion"
 import TeacherSubmission from './scenes/Teacher/submission';
-
+import Calender from "@/scenes/Teacher/Calender"
 import StudentAssessment from '@/scenes/Students/Assessment';
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -36,6 +36,7 @@ function App() {
             <Route path='/create_assessment' element={<CreateAssessment/>}/>
             <Route path='/addquestion' element={<QuestionForm/>}/>
             <Route path='/teachersubmission' element={<TeacherSubmission/>}/>
+            <Route path='/calendar' element={<Calender/>}/>
 
            {/* Students Route*/}
            <Route path='/studentAssessment' element={<StudentAssessment/>}/>

@@ -19,11 +19,14 @@ const QuestionSchema =new mongoose.Schema({
         type:String,
         required:true
     },
+    resources:{
+     type:String
+    },
     category:{
         type:String,
     },
     score:{
-    type:Number
+    type:Number,default:0
     },
     options:[{
         option:{type:String},

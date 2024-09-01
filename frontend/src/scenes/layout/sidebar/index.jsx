@@ -133,7 +133,7 @@ const SideBar = ({role}) => {
           {!role&&(
           <Item
             title="Submission"
-            path="/submission"
+            path="/teachersubmission"
             colors={colors}
             icon={<ReceiptOutlined />}
           />)}
