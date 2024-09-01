@@ -245,8 +245,8 @@ function Dashboard() {
         <Grid item xs={12} md={3}>
           <SideBar role={role} />
         </Grid>
-        <Grid item xs={12} md={9} mt={20}> 
-          <BarChart isDashboard={true} />
+        <Grid item xs={12} md={9} mt={20}> {!role&&(
+          <BarChart isDashboard={true} />)}
         </Grid>
       </Grid>
     </Box>

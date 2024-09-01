@@ -162,6 +162,7 @@ const Form = () => {
                   <MenuItem value="teacher">Teacher</MenuItem>
                 </TextField>
                 <TextField
+                  type="password"
                   label="password"
                   onBlur={handleBlur}
                   onChange={handleChange}

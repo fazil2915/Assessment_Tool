@@ -35,7 +35,11 @@ const Navbar = ({ onMenuToggle }) => {
   const handleMenuToggle = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
-
+  const handleLogout = () => {
+    dispatch(setLogout()); 
+    handleMenuToggle(); 
+    navigate('/'); 
+  };
   const handleClick=()=>{
     navigate("/dash")
   }
@@ -73,16 +77,9 @@ const Navbar = ({ onMenuToggle }) => {
         onClose={handleMenuToggle}
       >
         <MenuItem onClick={handleMenuToggle}>{`${user?user.name:""}`}</MenuItem>
-        <MenuItem
-          onClick={() => {
-            dispatch(setLogout({
-              navigate:"/"
-            }));
-            handleMenuToggle();
-          }}
-        >
-          Log Out
-        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+      Log Out
+    </MenuItem>
       </Menu>
       </Box>
     </Box>
