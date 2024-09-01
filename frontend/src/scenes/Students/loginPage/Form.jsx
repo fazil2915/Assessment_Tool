@@ -59,7 +59,7 @@ const Form = () => {
 
 
     const savedUserResponse = await fetch(
-      `http://localhost:8000/api/student/register`,
+      `${import.meta.env.VITE_BASE_URL}/api/student/register`,
       {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch(`http://localhost:8000/api/student/login`, {
+    const loggedInResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/api/student/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -162,6 +162,7 @@ const Form = () => {
                   <MenuItem value="teacher">Teacher</MenuItem>
                 </TextField>
                 <TextField
+                  type="password"
                   label="password"
                   onBlur={handleBlur}
                   onChange={handleChange}

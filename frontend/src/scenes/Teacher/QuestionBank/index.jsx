@@ -64,7 +64,7 @@ const Question_Bank = () => {
 //Add question to assess
 const addToAssessment = async (questionId) => {
   try {
-    const user = await fetch(`http://localhost:8000/api/teacher/assessment/${assessment._id}/toBank/${questionId}`, {
+    const user = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/${assessment._id}/toBank/${questionId}`, {
       method: "PATCH",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -91,7 +91,7 @@ navigate('/addquestion')
 // Fetch all questions
 const getQuestions = async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/teacher/assessment/getAllQuestion", {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/getAllQuestion`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,

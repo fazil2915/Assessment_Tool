@@ -51,7 +51,7 @@ const CourseForm = () => {
     }
     try {
       const body=JSON.stringify(values)
-      const response = await fetch(`http://localhost:8000/api/teacher/course/${user._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/course/${user._id}`, {
         method: "POST",
         body,
         headers: {

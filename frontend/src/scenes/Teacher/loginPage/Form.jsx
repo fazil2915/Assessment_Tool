@@ -59,7 +59,7 @@ const Form = () => {
 
 
     const savedUserResponse = await fetch(
-      `http://localhost:8000/api/teacher/register`,
+      `${import.meta.env.VITE_BASE_URL}/api/teacher/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch(`http://localhost:8000/api/teacher/login`, {
+    const loggedInResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

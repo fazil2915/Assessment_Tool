@@ -121,7 +121,7 @@ const createAssessment = () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8000/api/teacher/assessment/${user._id}`, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/${user._id}`, {
                 method: "POST",
                 body: JSON.stringify(formattedValues),
                 headers: {

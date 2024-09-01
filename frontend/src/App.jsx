@@ -21,46 +21,46 @@ import StudentAssessment from '@/scenes/Students/Assessment';
 
 
 const ProtectedRoute = ({ children, role }) => {
-  const userRole = useSelector((state) => state.user); // Get the user's role from Redux
-  const isAuth = Boolean(useSelector((state) => state.token)); // Check if user is authenticated
- 
-  
-  
+  const userRole = useSelector((state) => state.user.role); 
+  const isAuth = Boolean(useSelector((state) => state.token)); 
+
   if (!isAuth) {
     return <Navigate to="/" />;
   }
 
-  if (role && userRole.role !== role) {
+  if (role && userRole !== role) {
     return <Navigate to="/unauthorized" />;
   }
 
   return children;
 };
+
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
  
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
           <Route index element={<LandingPage />} />
-          <Route path="/" element={<Layout/>}>
-          <Route path="/unauthorized" element={<Unauthorized/>}/>
-          {/* Teacher Route*/}
-            <Route path="/dash" element={<ProtectedRoute role="teacher"><Dashboard /></ProtectedRoute>} />
-            <Route path='/course' element={<ProtectedRoute role="teacher"><CourseForm /></ProtectedRoute>}/>
-            <Route path="/assessment" element={<ProtectedRoute role="teacher"><Contacts/></ProtectedRoute>}/>
-            <Route path="/question_bank" element={<ProtectedRoute role="teacher"><Question_Bank/></ProtectedRoute>}/>
-            <Route path='/create_assessment' element={<ProtectedRoute role="teacher"><CreateAssessment/></ProtectedRoute>}/>
-            <Route path='/addquestion' element={<ProtectedRoute role="teacher"><QuestionForm/></ProtectedRoute>}/>
-            <Route path='/teachersubmission' element={<ProtectedRoute role="teacher"><TeacherSubmission /></ProtectedRoute>}/>
-            <Route path='/calendar' element={<Calender/>}/>
+          <Route path="/" element={<Layout />}>
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            
+            {/* Teacher Routes */}
+            <Route path="/dash" element={<Dashboard />} />
+            <Route path="/course" element={<ProtectedRoute role="teacher"><CourseForm /></ProtectedRoute>} />
+            <Route path="/assessment" element={<ProtectedRoute role="teacher"><Contacts /></ProtectedRoute>} />
+            <Route path="/question_bank" element={<ProtectedRoute role="teacher"><Question_Bank /></ProtectedRoute>} />
+            <Route path="/create_assessment" element={<ProtectedRoute role="teacher"><CreateAssessment /></ProtectedRoute>} />
+            <Route path="/addquestion" element={<ProtectedRoute role="teacher"><QuestionForm /></ProtectedRoute>} />
+            <Route path="/teachersubmission" element={<ProtectedRoute role="teacher"><TeacherSubmission /></ProtectedRoute>} />
+            <Route path="/calendar" element={<Calender />} />
 
-           {/* Students Route*/}
-           <Route path='/studentAssessment' element={<ProtectedRoute role="student"><StudentAssessment/></ProtectedRoute>}/>
+            {/* Student Routes */}
+            <Route path="/studentAssessment" element={<ProtectedRoute role="student"><StudentAssessment /></ProtectedRoute>} />
+            <Route path="/dash" element={<ProtectedRoute role="student"><Dashboard /></ProtectedRoute>} />
           </Route>
         </Routes>
       </ThemeProvider>

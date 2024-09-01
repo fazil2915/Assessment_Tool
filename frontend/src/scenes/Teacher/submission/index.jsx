@@ -31,7 +31,7 @@ const TeacherSubmission = () => {
     //submision
     const getAssessments=async()=>{
         try {
-            const assess=await fetch(`http://localhost:8000/api/teacher/assessment/${user._id}/getpublished`,{
+            const assess=await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/assessment/${user._id}/getpublished`,{
                 method:"GET",
                 
                     headers: {
