@@ -3101,3 +3101,4 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/pipeline\",\"status\":\"204\",\"responseTime\":\"0.257\"}","timestamp":"2024-09-01T18:34:29.581Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/pipeline\",\"status\":\"200\",\"responseTime\":\"319.007\"}","timestamp":"2024-09-01T18:34:29.937Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/pipeline\",\"status\":\"200\",\"responseTime\":\"336.801\"}","timestamp":"2024-09-01T18:34:29.940Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"404\",\"responseTime\":\"9.929\"}","timestamp":"2024-09-01T19:31:10.713Z"}
