@@ -14,7 +14,7 @@ dotenv.config()
 
 const corsOptions = {
   origin: process.env.frontend, 
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST','PATCH','PUT','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
