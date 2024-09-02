@@ -13,7 +13,7 @@ const app=express();
 dotenv.config()
 
 const corsOptions = {
-  origin: "https://assessment-tool-nmyz.vercel.app", 
+  origin: process.env.frontend, 
   methods: ['GET', 'POST','PATCH','PUT','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
