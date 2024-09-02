@@ -3152,3 +3152,5 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"OPTIONS\",\"url\":\"/api/teacher/pipeline\",\"status\":\"204\",\"responseTime\":\"0.206\"}","timestamp":"2024-09-02T07:44:02.593Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/pipeline\",\"status\":\"200\",\"responseTime\":\"398.814\"}","timestamp":"2024-09-02T07:44:03.008Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/teacher/pipeline\",\"status\":\"200\",\"responseTime\":\"411.503\"}","timestamp":"2024-09-02T07:44:03.011Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"200\",\"responseTime\":\"5.268\"}","timestamp":"2024-09-02T08:38:22.285Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/favicon.ico\",\"status\":\"200\",\"responseTime\":\"0.939\"}","timestamp":"2024-09-02T08:38:24.048Z"}

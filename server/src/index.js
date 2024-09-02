@@ -45,6 +45,7 @@ app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 //api  
 app.use('/api/teacher',TeacherRoutes)
 app.use('/api/student',StudentRoutes)
+app.use('/',(req,res)=>res.send("hey iam alive"));
 //server
 const startServer=()=>{
     try{
