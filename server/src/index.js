@@ -13,7 +13,7 @@ const app=express();
 dotenv.config()
 
 const corsOptions = {
-  origin: "http://localhost:5173", 
+  origin: "https://assessment-tool-nmyz.vercel.app", 
   methods: ['GET', 'POST','PATCH','PUT','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -39,7 +39,7 @@ app.use(
 app.use(express.json());
 app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 //api  
