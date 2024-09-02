@@ -39,7 +39,7 @@ app.use(
 app.use(express.json());
 app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
 //api  
