@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  IconButton,
-  Typography,
   Grid,
   useMediaQuery,
   useTheme,

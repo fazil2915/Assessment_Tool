@@ -33,7 +33,7 @@ const BarChart = ({ isDashboard = false }) => {
         Automated: item.gradingOptions.find((opt) => opt.option === 'Automated')?.count || 0,
       }));
 
-      console.log('Formatted Data:', formattedData);
+     
       setData(formattedData);
     } catch (err) {
       console.error('Error fetching data:', err);

@@ -80,7 +80,7 @@ const createAssessment = () => {
 
     const getAsessment = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/teacher/getallstudents`, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/teacher/getallstudents`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,
