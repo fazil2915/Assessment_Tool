@@ -1,6 +1,7 @@
 # Assessment_Tool
  This project is a comprehensive virtual assessment tool designed for teachers to efficiently manage student assessments. It offers a wide range of features that make the process of creating, managing, and analyzing assessments seamless and effective.
-
+ 
+![Diagram](https://raw.githubusercontent.com/fazil2915/Assessment_Tool/main/frontend/public/dashboard.png)
 ## System design
 All complete details have covered in this file [Details](https://app.eraser.io/workspace/GM275ya5R2JZooxcEdE6).
 
