@@ -317,10 +317,21 @@ export const getAggregatedData = async (req, res) => {
       {
         $group: {
           _id: {
+            teacherId:"$teacherId",
             type: "$type",
             gradingOptions: "$grading_options.type"
           },
           count: { $sum: 1 }
+        }
+      },
+      //remove the teacherId from the grouping and aggregate
+      {
+        $group:{
+          _id:{
+            type:"$_id.type",
+            gradingOptions:"$_id.gradingOptions"
+          },
+          count:{$sum:1}
         }
       },
       {
@@ -356,8 +367,7 @@ export const getAggregatedData = async (req, res) => {
 //get submission done by the student
 
 
-//give feedback
-
+//give feedback based on status option
 
 
 //recent Activities
