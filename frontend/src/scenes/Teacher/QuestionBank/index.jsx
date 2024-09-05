@@ -84,9 +84,6 @@ const addToAssessment = async (questionId) => {
   }
 }
 
-const handleclick=()=>{
-navigate('/addquestion')
-}
 
 // Fetch all questions
 const getQuestions = async () => {
