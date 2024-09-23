@@ -15,7 +15,7 @@ Deployment: Vercel for easy and reliable deployment.
 ## Deployment on Vercel
 #### Prerequisites
 * A Vercel account. If you don't have one, you can sign up here.
-* The Vercel CLI installed on your local machine. You can install it globally using npm
+* You can install it globally using npm
 `````````
 npm install -g vercel
 ````````````
